@@ -2,11 +2,13 @@ package yimin.log.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.swing.RepaintManager;
 
 import yimin.log.pojo.User;
@@ -90,6 +92,21 @@ public class LoginServlet extends HttpServlet {
 					resp.addCookie(cookie);
 //					请求转发,带着数据req还有resp信息转回
 //					req.getRequestDispatcher("main").forward(req, resp);
+//					add the data to the session object
+					HttpSession hs = req.getSession();
+					hs.setAttribute("user", u);
+//					Create an counter in the login servlet
+					ServletContext sc = this.getServletContext();
+					if (sc.getAttribute("nums") != null) {
+						 int nums = Integer.parseInt((String) sc.getAttribute("nums"));
+//						increase the counter and then put back to Servletcontext
+						nums++;
+						sc.setAttribute("nums", nums);
+					} else {
+//						if you first visit the servlet, the attribute "nums" should null
+						sc.setAttribute("nums", 1);
+					}
+					
 //					重定向
 					resp.sendRedirect("/login/main");
 					return;

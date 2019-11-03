@@ -26,6 +26,7 @@ public class CookieServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+//		set the charset for response and request
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
 		Cookie[] cks = req.getCookies();
@@ -44,6 +45,11 @@ public class CookieServlet extends HttpServlet {
 				LoginService ls = new LoginServiceImpl();
 				User user = ls.checkUidService(uid);
 				if(user!=null){
+//					need to add the information to session object as well
+					req.getSession().setAttribute("user", user);
+					int nums = (int) this.getServletContext().getAttribute("nums");
+					nums++;
+					this.getServletContext().setAttribute("nums", nums);
 //					redirect
 					resp.sendRedirect("/login/main");
 					return;
