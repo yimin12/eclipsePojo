@@ -35,3 +35,6 @@ Project 2: Information Management System (Easy)
         birth		date	
     Additional:
       Use log4j	
+
+Project 3: Bank Simulation
+  Simulating a function of bank. What you need is a database that stored the client information, and implement the basic function what 	   bank need
