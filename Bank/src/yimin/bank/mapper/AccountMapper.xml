@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="yimin.bank.mapper.AccountMapper">
+  	<!-- select account by Account Number and Password -->
+  	<select id="selByAccnoPwd" resultType="Account" parameterType="Account">
+  		select * from account where accno=#{accNo} and password=#{password}
+  	</select>
+  	<!-- select account by Account User Name and Account Number -->
+  	<select id="selByAccnoName" resultType="Account" parameterType="Account">
+  		select * from account where accno=#{accNo} and password=#{name}
+  	</select>
+  	<!-- update the balance by Account Number -->
+  	<update id="updBalanceByAccno" parameterType="Account">
+		update account set balance=balance+#{balance} where accno=#{accNo}
+  	</update>
+  </mapper>
